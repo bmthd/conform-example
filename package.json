@@ -6,19 +6,40 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format:check": "biome format ./src",
+    "format:fix": "biome format --write ./src",
+    "type:check": "tsc --noEmit",
+    "spell:check": "cspell . --gitignore --config cspell.config.yaml",
+    "theme": "yamada-cli tokens ./src/theme/index.ts",
+    "theme:watch": "yamada-cli tokens ./src/theme/index.ts --watch",
+    "prepare": "bun theme",
+    "depcheck": "bunx knip"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.6"
+    "@conform-to/react": "^1.1.5",
+    "@yamada-ui/react": "^1.4.9",
+    "conform-to-valibot": "^1.10.0",
+    "next": "^15.0.0-canary.128",
+    "react": "^19.0.0-rc-b57d2823-20240822",
+    "react-dom": "^19.0.0-rc-b57d2823-20240822",
+    "valibot": "^0.39.0"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.6"
+    "@biomejs/biome": "^1.8.3",
+    "@types/node": "^20.16.1",
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc",
+    "@yamada-ui/cli": "^1.0.6",
+    "babel-plugin-react-compiler": "^0.0.0-experimental-48eb8f4-20240822",
+    "better-typescript-lib": "^2.7.0",
+    "cspell": "^8.9.1",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.6",
+    "typescript": "^5.5.4"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc"
   }
 }
