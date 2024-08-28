@@ -4,5 +4,6 @@ export default {
   experimental: {
     typedRoutes: true,
     reactCompiler: true,
+    ppr: true,
   },
 };
