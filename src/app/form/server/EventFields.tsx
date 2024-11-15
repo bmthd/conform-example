@@ -3,10 +3,8 @@ import { NumberInputField, TextareaField, TextField } from "@/ui/form/primitive"
 import { fromObject } from "@/utils/fromObject";
 import { getFieldsetProps } from "@conform-to/react";
 import { Button, Fieldset, HStack, Legend, VStack } from "@yamada-ui/react";
-import { ComponentProps, FC } from "react";
+import { FC } from "react";
 import { useEventForm } from "./hooks";
-import { Table } from "@yamada-ui/table";
-import { Prettify } from "valibot";
 
 export const EventFields: FC<{
   form: ReturnType<typeof useEventForm>["form"];
@@ -44,9 +42,6 @@ export const EventFields: FC<{
       </Fieldset>
       {/* <SelectField name={field.entryOption} label="参加方法" options={entryOptions} /> */}
       <TextareaField name={field.enquete.name} label="アンケート" />
-      <Table />
     </>
   );
 };
-
-type A = Prettify<ComponentProps<typeof Table>>

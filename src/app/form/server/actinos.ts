@@ -4,10 +4,7 @@ import { parseWithValibot } from "conform-to-valibot";
 import { schema } from "../_common/schema";
 import { FormState } from "./types";
 
-export const registerAction = async (
-  prevState: FormState,
-  formData: FormData,
-): Promise<FormState> => {
+export const registerAction = async (_: FormState, formData: FormData): Promise<FormState> => {
   const submission = parseWithValibot(formData, { schema });
   if (submission.status !== "success") {
     return { status: "error", submissionResult: submission.reply() };
@@ -19,8 +16,8 @@ export const registerAction = async (
 };
 
 export const editAction = async (
-  id: string,
-  prevState: FormState,
+  _: string,
+  _2: FormState,
   formData: FormData,
 ): Promise<FormState> => {
   const submission = parseWithValibot(formData, { schema });
