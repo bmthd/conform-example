@@ -1,6 +1,7 @@
 import { getInputProps, useField } from "@conform-to/react";
 import { Checkbox, FormControl, Input, NumberInput, Textarea, VStack } from "@yamada-ui/react";
 import { type ComponentProps, type FC, useId } from "react";
+import { FieldProps } from "./types";
 
 /**
  * ラベルとエラーメッセージを紐付けたInput
@@ -21,8 +22,7 @@ export const TextField: FC<FieldProps<string> & ComponentProps<typeof Input>> = 
   const errorMessage = fieldMeta.errors ? [0] : undefined;
   return (
     <FormControl
-      labelProps={{ id }}
-      htmlFor={inputProps.id}
+      labelProps={{ id, htmlFor: inputProps.id }}
       {...{ helperMessage, errorMessage, label, isRequired, "aria-invalid": ariaInvalid }}
     >
       <Input {...formProps} {...inputProps} aria-labelledby={id} />
@@ -49,8 +49,7 @@ export const TextareaField: FC<FieldProps<string> & ComponentProps<typeof Textar
   const errorMessage = fieldMeta.errors ? [0] : undefined;
   return (
     <FormControl
-      labelProps={{ id }}
-      htmlFor={textareaProps.id}
+      labelProps={{ id, htmlFor: textareaProps.id }}
       {...{ helperMessage, errorMessage, label, isRequired, "aria-invalid": ariaInvalid }}
     >
       <Textarea {...formProps} {...textareaProps} aria-labelledby={id} />
@@ -76,8 +75,7 @@ export const NumberInputField: FC<FieldProps<number> & ComponentProps<typeof Num
   } = getInputProps(fieldMeta, { type: "number" });
   return (
     <FormControl
-      labelProps={{ id }}
-      htmlFor={inputProps.id}
+      labelProps={{ id, htmlFor: inputProps.id }}
       {...{ helperMessage, label, isRequired, "aria-invalid": ariaInvalid }}
     >
       {/* @ts-expect-error minの型が合わないが、コンポーネントライブラリの問題なため許容 */}
@@ -97,14 +95,18 @@ export const CheckboxField: FC<FieldProps<boolean> & ComponentProps<typeof Check
 }) => {
   const id = useId();
   const [fieldMeta] = useField(name);
-  const { defaultChecked: defaultIsChecked, ...inputProps } = getInputProps(fieldMeta, {
+  const {
+    defaultChecked: defaultIsChecked,
+    required: isRequired,
+    "aria-invalid": ariaInvalid,
+    ...inputProps
+  } = getInputProps(fieldMeta, {
     type: "checkbox",
   });
   return (
     <FormControl
-      labelProps={{ id }}
-      htmlFor={checkboxProps.id}
-      {...{ helperMessage, label, ...getFieldErrorProps(fieldMeta) }}
+      labelProps={{ id, htmlFor: inputProps.id }}
+      {...{ helperMessage, label, isRequired, "aria-invalid": ariaInvalid }}
     >
       <VStack alignItems="start" p="4">
         <Checkbox

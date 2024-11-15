@@ -1,16 +1,17 @@
 import { type SubmissionResult } from "@conform-to/react";
 
-export type FormState =
+export type FormState = Readonly<
   | {
       status: "success";
       message: string;
-      submission?: SubmissionResult;
+      submissionResult?: SubmissionResult;
     }
   | {
       status: "error";
-      submission?: SubmissionResult;
+      submissionResult?: SubmissionResult;
     }
   | {
       status: "idle";
-      submission?: SubmissionResult;
-    };
+      submissionResult?: SubmissionResult;
+    }
+>;

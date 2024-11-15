@@ -10,12 +10,12 @@ export const registerAction = async (
 ): Promise<FormState> => {
   const submission = parseWithValibot(formData, { schema });
   if (submission.status !== "success") {
-    return { status: "error", submission: submission.reply() };
+    return { status: "error", submissionResult: submission.reply() };
   }
 
   console.log("registerAction", submission.value);
 
-  return { status: "success", message: "登録しました", submission: submission.reply() };
+  return { status: "success", message: "登録しました", submissionResult: submission.reply() };
 };
 
 export const editAction = async (
@@ -25,10 +25,10 @@ export const editAction = async (
 ): Promise<FormState> => {
   const submission = parseWithValibot(formData, { schema });
   if (submission.status !== "success") {
-    return { status: "error", submission: submission.reply() };
+    return { status: "error", submissionResult: submission.reply() };
   }
 
   console.log("editAction", submission.value);
 
-  return { status: "success", message: "更新しました", submission: submission.reply() };
+  return { status: "success", message: "更新しました", submissionResult: submission.reply() };
 };

@@ -1,5 +1,5 @@
 "use client";
-import { FormProvider, FormStateInput } from "@conform-to/react";
+import { FormProvider, FormStateInput, getFormProps } from "@conform-to/react";
 import { Button, Card, Container, HStack } from "@yamada-ui/react";
 import Form from "next/form";
 import { EventFields } from "./EventFields";
@@ -11,7 +11,7 @@ export default function Page() {
   return (
     <Card as={Container}>
       <FormProvider context={form.context}>
-        <Form action={action}>
+        <Form action={action} {...getFormProps(form)}>
           <EventFields form={form} field={field} />
           <HStack>
             <Button type="reset" {...form.reset.getButtonProps()}>

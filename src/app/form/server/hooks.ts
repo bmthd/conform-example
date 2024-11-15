@@ -21,12 +21,12 @@ export const useEventForm = (editData?: { id: string; initialValue: EventRegiste
   const defaultValue = editData ? editData.initialValue : initialValue;
   const [state, action, isPending] = useActionState(
     editData ? editAction.bind(null, editData.id) : registerAction,
-    { status: "idle", submission: { initialValue: defaultValue } },
+    { status: "idle", submissionResult: { initialValue: defaultValue } },
   );
   const [form, field] = useForm({
-    id: defaultValue ? "eventRegister" : "eventEdit",
+    id: editData ? "eventRegister" : "eventEdit",
     defaultValue,
-    lastResult: state.submission,
+    lastResult: state.submissionResult,
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
     constraint: getValibotConstraint(schema),
@@ -40,6 +40,6 @@ export const useEventForm = (editData?: { id: string; initialValue: EventRegiste
       form.reset();
       notice({ status: "success", title: state.message });
     }
-  });
+  }, [form, notice, state]);
   return { form, field, action, isPending };
 };
